@@ -3,12 +3,12 @@
 
 #include "stm32f1xx_hal.h"
 
-#define NUMROWS        4
-#define NUMCOLS        4
-#define KEYS           16
- 
-#define KEY_PRESSED    0
-#define KEY_RELEASED   1
+#define NUMROWS            4
+#define NUMCOLS            4
+#define KEYS               16
+
+#define KEY_PRESSED        0
+#define NON_KEY_RELEASED   0
 
 /* Rows INPUT*/
 #define KEYPAD_ROW1_PORT          GPIOA
@@ -40,14 +40,14 @@ typedef struct
 	char Value;
 } KEYPAD_t;
 
-void KEYPAD4X4_Init(KEYPAD_t* KEYPAD, char KEYMAP[NUMROWS][NUMCOLS], GPIO_TypeDef* COL1_PORT, uint32_t COL1_PIN, 
-										                                                 GPIO_TypeDef* COL2_PORT, uint32_t COL2_PIN,
-										                                                 GPIO_TypeDef* COL3_PORT, uint32_t COL3_PIN,
-                                                                     GPIO_TypeDef* COL4_PORT, uint32_t COL4_PIN,
-										                                                 GPIO_TypeDef* ROW1_PORT, uint32_t ROW1_PIN,
+void KEYPAD4X4_Init(KEYPAD_t* KEYPAD, char KEYMAP[NUMROWS][NUMCOLS], GPIO_TypeDef* ROW1_PORT, uint32_t ROW1_PIN,
 										                                                 GPIO_TypeDef* ROW2_PORT, uint32_t ROW2_PIN,
 										                                                 GPIO_TypeDef* ROW3_PORT, uint32_t ROW3_PIN,
-										                                                 GPIO_TypeDef* ROW4_PORT, uint32_t ROW4_PIN);
+										                                                 GPIO_TypeDef* ROW4_PORT, uint32_t ROW4_PIN,
+                                                                     GPIO_TypeDef* COL1_PORT, uint32_t COL1_PIN, 
+										                                                 GPIO_TypeDef* COL2_PORT, uint32_t COL2_PIN,
+										                                                 GPIO_TypeDef* COL3_PORT, uint32_t COL3_PIN,
+                                                                     GPIO_TypeDef* COL4_PORT, uint32_t COL4_PIN);
 
 char KEYPAD4X4_scan(KEYPAD_t* KEYPAD);
 

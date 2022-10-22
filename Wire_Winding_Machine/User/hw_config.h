@@ -24,13 +24,20 @@ extern "C"
 /****************************************
            User Defition
 *****************************************/
+#define TB6600DIR_PORT              GPIOB
+#define TB6600DIR_PIN               GPIO_PIN_14
+#define TB6600EA_PORT               GPIOB
+#define TB6600EA_PIN                GPIO_PIN_15
+#define TB6600PUL_PORT              GPIOA
+#define TB6600PUL                   8
 
-#define TB6600DIR               1
-#define TB6600EA                2
-#define TB6600PUL               3
+#define	TB6600_RIGHT_2_LEFT         GPIO_PIN_RESET
+#define	TB6600_LEFT_2_RIGHT         GPIO_PIN_SET
+#define TB6600_ENABLE               GPIO_PIN_SET
+#define TB6600_DISABLE              GPIO_PIN_RESET
 
-#define MOTOR_STEP		          1.8
-#define MOTOR_MAX_STEP_AROUND   200
+#define MOTOR_STEP		              1.8
+#define MOTOR_MAX_STEP_AROUND       200
 
 #ifdef _cplusplus
 }

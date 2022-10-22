@@ -9,14 +9,14 @@ static void Keypad_delay(uint16_t Time)
 	HAL_Delay(Time);
 }
 
-void KEYPAD4X4_Init(KEYPAD_t* KEYPAD, char KEYMAP[NUMROWS][NUMCOLS], GPIO_TypeDef* COL1_PORT, uint32_t COL1_PIN, 
-										                                                 GPIO_TypeDef* COL2_PORT, uint32_t COL2_PIN,
-										                                                 GPIO_TypeDef* COL3_PORT, uint32_t COL3_PIN,
-                                                                     GPIO_TypeDef* COL4_PORT, uint32_t COL4_PIN,
-										                                                 GPIO_TypeDef* ROW1_PORT, uint32_t ROW1_PIN,
+void KEYPAD4X4_Init(KEYPAD_t* KEYPAD, char KEYMAP[NUMROWS][NUMCOLS], GPIO_TypeDef* ROW1_PORT, uint32_t ROW1_PIN,
 										                                                 GPIO_TypeDef* ROW2_PORT, uint32_t ROW2_PIN,
 										                                                 GPIO_TypeDef* ROW3_PORT, uint32_t ROW3_PIN,
-										                                                 GPIO_TypeDef* ROW4_PORT, uint32_t ROW4_PIN)
+										                                                 GPIO_TypeDef* ROW4_PORT, uint32_t ROW4_PIN,
+                                                                     GPIO_TypeDef* COL1_PORT, uint32_t COL1_PIN, 
+										                                                 GPIO_TypeDef* COL2_PORT, uint32_t COL2_PIN,
+										                                                 GPIO_TypeDef* COL3_PORT, uint32_t COL3_PIN,
+                                                                     GPIO_TypeDef* COL4_PORT, uint32_t COL4_PIN)
 {
 	
 	KEYPAD->ColPort[0] = COL1_PORT;
@@ -77,7 +77,7 @@ char KEYPAD4X4_scan(KEYPAD_t* KEYPAD) // Scan Colums
 		}
 	}
 	
-	return KEY_RELEASED;
+	return NON_KEY_RELEASED;
 }
 
 void KEYPAD4x4_Config(KEYPAD_t* KEYPAD, char KEYMAP_Config[NUMROWS][NUMCOLS])

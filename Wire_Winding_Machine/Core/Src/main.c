@@ -18,13 +18,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "keypad.h"
+#include "hw_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,16 +96,18 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-	KEYPAD4X4_Init(&KeyPad, KEYMAP, KEYPAD_COLUM1_PORT, KEYPAD_COLUM1_PIN,
-	                                KEYPAD_COLUM2_PORT, KEYPAD_COLUM2_PIN,
-																	KEYPAD_COLUM3_PORT, KEYPAD_COLUM3_PIN,
-																	KEYPAD_COLUM4_PORT, KEYPAD_COLUM4_PIN,
-																	KEYPAD_ROW1_PORT, KEYPAD_ROW1_PIN,
+	KEYPAD4X4_Init(&KeyPad, KEYMAP, KEYPAD_ROW1_PORT, KEYPAD_ROW1_PIN,
 																	KEYPAD_ROW2_PORT, KEYPAD_ROW2_PIN,
 																	KEYPAD_ROW3_PORT, KEYPAD_ROW3_PIN,
-																	KEYPAD_ROW4_PORT, KEYPAD_ROW4_PIN);
+																	KEYPAD_ROW4_PORT, KEYPAD_ROW4_PIN,
+                                  KEYPAD_COLUM1_PORT, KEYPAD_COLUM1_PIN,
+	                                KEYPAD_COLUM2_PORT, KEYPAD_COLUM2_PIN,
+																	KEYPAD_COLUM3_PORT, KEYPAD_COLUM3_PIN,
+																	KEYPAD_COLUM4_PORT, KEYPAD_COLUM4_PIN);
+																	
+	HAL_GPIO_WritePin(TB6600DIR_PORT, TB6600DIR_PIN, TB6600_RIGHT_2_LEFT);
+	HAL_GPIO_WritePin(TB6600EA_PORT, TB6600EA_PIN, TB6600_ENABLE);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,7 +122,35 @@ int main(void)
 		{
 			HAL_UART_Transmit(&huart1, (uint8_t*)&key, 1, 1000);
 		}
-		HAL_Delay(50);
+		
+		// turn right
+		if(key == 'A')
+		{
+			HAL_GPIO_WritePin(TB6600DIR_PORT, TB6600DIR_PIN, TB6600_RIGHT_2_LEFT);
+		}
+		
+		// turn left
+		if(key == 'B')
+		{
+			HAL_GPIO_WritePin(TB6600DIR_PORT, TB6600DIR_PIN, TB6600_LEFT_2_RIGHT);
+		}
+		
+		// setup the number of around
+		if(key == 'C')
+		{
+			for (int x = 0; x < MOTOR_MAX_STEP_AROUND; x ++) 
+			{
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
+				HAL_Delay (1);
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
+				HAL_Delay (1);
+			}
+		}
+		
+		// setup velocity
+		if(key == 'D')
+		{
+		}
   }
   /* USER CODE END 3 */
 }

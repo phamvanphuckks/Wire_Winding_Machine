@@ -25,6 +25,4 @@ wire_winding_machine\keypad.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal
 wire_winding_machine\keypad.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 wire_winding_machine\keypad.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 wire_winding_machine\keypad.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
-wire_winding_machine\keypad.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
-wire_winding_machine\keypad.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 wire_winding_machine\keypad.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
