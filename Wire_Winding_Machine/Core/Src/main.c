@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -25,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "keypad.h"
 #include "hw_config.h"
+#include "tb6600.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,7 +57,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-char key;
+char key = NON_KEY_RELEASED;
 KEYPAD_t KeyPad;
 
 char KEYMAP[NUMROWS][NUMCOLS] = {
@@ -64,6 +66,25 @@ char KEYMAP[NUMROWS][NUMCOLS] = {
 	{'7', '8', '9', 'C'},
 	{'*', '0', '#', 'D'}
 };
+
+static tb6600_t tb6600;
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    if (htim->Instance == htim2.Instance)
+    {
+      /* Toggle PA8 */
+			HAL_GPIO_TogglePin(TB6600PUL_PORT, TB6600PUL);
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+			
+			tb6600.step_number++;
+			if(tb6600.step_number == (tb6600.pulse_per_rev *2))
+			{
+				tb6600.rev_number_cur++;
+				tb6600.step_number = 0;
+			}
+    }
+}
 
 /* USER CODE END 0 */
 
@@ -96,6 +117,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 	KEYPAD4X4_Init(&KeyPad, KEYMAP, KEYPAD_ROW1_PORT, KEYPAD_ROW1_PIN,
 																	KEYPAD_ROW2_PORT, KEYPAD_ROW2_PIN,
@@ -105,9 +127,11 @@ int main(void)
 	                                KEYPAD_COLUM2_PORT, KEYPAD_COLUM2_PIN,
 																	KEYPAD_COLUM3_PORT, KEYPAD_COLUM3_PIN,
 																	KEYPAD_COLUM4_PORT, KEYPAD_COLUM4_PIN);
-																	
-	HAL_GPIO_WritePin(TB6600DIR_PORT, TB6600DIR_PIN, TB6600_RIGHT_2_LEFT);
-	HAL_GPIO_WritePin(TB6600EA_PORT, TB6600EA_PIN, TB6600_ENABLE);
+																		
+	tb6600_init(&tb6600, TB6600_ENABLE, TB6600_RIGHT_2_LEFT, PULSE_PER_REV_200);
+	
+  /*##-1- Start the TIM Base generation in interrupt mode ####################*/
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -123,33 +147,35 @@ int main(void)
 			HAL_UART_Transmit(&huart1, (uint8_t*)&key, 1, 1000);
 		}
 		
-		// turn right
+		// turn right to left
 		if(key == 'A')
 		{
-			HAL_GPIO_WritePin(TB6600DIR_PORT, TB6600DIR_PIN, TB6600_RIGHT_2_LEFT);
+			tb6600_set_direction(&tb6600, TB6600_RIGHT_2_LEFT);
 		}
 		
-		// turn left
+		// turn left to right
 		if(key == 'B')
 		{
-			HAL_GPIO_WritePin(TB6600DIR_PORT, TB6600DIR_PIN, TB6600_LEFT_2_RIGHT);
+			tb6600_set_direction(&tb6600, TB6600_LEFT_2_RIGHT);
 		}
 		
-		// setup the number of around
+		// Start
 		if(key == 'C')
 		{
-			for (int x = 0; x < MOTOR_MAX_STEP_AROUND; x ++) 
-			{
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
-				HAL_Delay (1);
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-				HAL_Delay (1);
-			}
+			tb6600_set_status(&tb6600, TB6600_ENABLE);
 		}
 		
-		// setup velocity
+		// /Pause
 		if(key == 'D')
 		{
+			tb6600_set_status(&tb6600, TB6600_DISABLE);
+		}
+		
+		// rpm
+		if(key == '#')
+		{
+			tb6600.rpm += 10;
+			tb6600_set_speed(&tb6600, tb6600.rpm);
 		}
   }
   /* USER CODE END 3 */

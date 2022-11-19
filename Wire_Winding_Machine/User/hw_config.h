@@ -21,6 +21,12 @@ extern "C"
 {
 #endif
 
+/*
+	Pulse input frequency up to 20 kHz
+	+ max 20kHz when duty cyle is 25 high / 75 low
+	+ max 13kHz when duty cycle is 50 / 50
+*/
+
 /****************************************
            User Defition
 *****************************************/
@@ -29,12 +35,7 @@ extern "C"
 #define TB6600EA_PORT               GPIOB
 #define TB6600EA_PIN                GPIO_PIN_15
 #define TB6600PUL_PORT              GPIOA
-#define TB6600PUL                   8
-
-#define	TB6600_RIGHT_2_LEFT         GPIO_PIN_RESET
-#define	TB6600_LEFT_2_RIGHT         GPIO_PIN_SET
-#define TB6600_ENABLE               GPIO_PIN_SET
-#define TB6600_DISABLE              GPIO_PIN_RESET
+#define TB6600PUL                   GPIO_PIN_8
 
 #define MOTOR_STEP		              1.8
 #define MOTOR_MAX_STEP_AROUND       200

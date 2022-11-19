@@ -3,12 +3,12 @@
 
 #include "stm32f1xx_hal.h"
 
-#define NUMROWS            4
-#define NUMCOLS            4
-#define KEYS               16
+#define NUMROWS                   4
+#define NUMCOLS                   4
+#define KEYS                      16
 
-#define KEY_PRESSED        0
-#define NON_KEY_RELEASED   0
+#define KEY_PRESSED               0
+#define NON_KEY_RELEASED          0
 
 /* Rows INPUT*/
 #define KEYPAD_ROW1_PORT          GPIOA
