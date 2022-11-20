@@ -25,3 +25,8 @@ trong đó 0-13khz nếu 50/50, 0-20Khz nếu 25/75
 Mã bản tin
 
 | 0x55 0xAA | Length | command type | 4 byte | CheckSum |
+
+=============================================================================================================================================
+1 BUG - important  - not fixed
++ đến 60 rpm xảy ra hiện tượng xoay giật giật, không kiểm soát
++ chia để tính toán giá trị nạp vào có nhiều sai số => lấy số thực phần x.y => x là phần nguyên rồi. tính tổng của y rồi biến thành offset của số vòng.

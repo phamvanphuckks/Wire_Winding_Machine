@@ -64,7 +64,7 @@ void tb6600_set_rpm(tb6600_t *tb6600, uint16_t rpm)
 	tb6600->rpm = rpm;
 	
 	// timer
-	tb6600->tim.period = (uint16_t)((float)(60.0/((tb6600->rpm)*(tb6600->pulse_per_rev)))/(float)(1.0/(12000.0)))/2;
+	tb6600->tim.period = (uint16_t)((float)(60.0/((tb6600->rpm)*(tb6600->pulse_per_rev)))/(float)(1.0/(12000.0)))/2 - 1;
 	
 	if(tb6600->tim.period < 1)
 	{

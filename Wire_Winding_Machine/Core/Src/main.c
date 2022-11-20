@@ -144,7 +144,7 @@ int main(void)
 																		
 	tb6600_init(&tb6600, TB6600_ENABLE, TB6600_RIGHT_2_LEFT, PULSE_PER_REV_200);
 	
-  /*##-1- Start the TIM Base generation in interrupt mode ####################*/
+  /*##  Start the TIM Base generation in interrupt mode ####################*/
   HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
@@ -197,6 +197,8 @@ int main(void)
 		{
 			tb6600_set_num_of_rev(&tb6600, 5, 1);
 		}
+		
+		HAL_Delay(10);
   }
   /* USER CODE END 3 */
 }
