@@ -32,5 +32,5 @@ wire_winding_machine\main.o: ../Core/Inc/tim.h
 wire_winding_machine\main.o: ../Core/Inc/usart.h
 wire_winding_machine\main.o: ../Core/Inc/gpio.h
 wire_winding_machine\main.o: ../User/keypad.h
-wire_winding_machine\main.o: ../User/hw_config.h
 wire_winding_machine\main.o: ../User/tb6600.h
+wire_winding_machine\main.o: ../User/hw_config.h

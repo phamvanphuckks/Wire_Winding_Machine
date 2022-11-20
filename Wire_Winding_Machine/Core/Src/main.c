@@ -25,8 +25,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "keypad.h"
-#include "hw_config.h"
 #include "tb6600.h"
+#include "hw_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +57,8 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+// For key pad
 char key = NON_KEY_RELEASED;
 KEYPAD_t KeyPad;
 
@@ -67,23 +69,35 @@ char KEYMAP[NUMROWS][NUMCOLS] = {
 	{'*', '0', '#', 'D'}
 };
 
+// For TB6600
 static tb6600_t tb6600;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-    if (htim->Instance == htim2.Instance)
-    {
-      /* Toggle PA8 */
-			HAL_GPIO_TogglePin(TB6600PUL_PORT, TB6600PUL);
-			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	if ((htim->Instance == htim2.Instance) && (tb6600.en_stt == TB6600_ENABLE))
+	{
+		/* Toggle PA8 */
+		HAL_GPIO_TogglePin(TB6600PUL_PORT, TB6600PUL);
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
+		tb6600.step_number++;
+		if(tb6600.step_number >= (tb6600.pulse_per_rev * 2))
+		{
+			tb6600.rev_number_cur++;
 			
-			tb6600.step_number++;
-			if(tb6600.step_number == (tb6600.pulse_per_rev *2))
+			if(tb6600.number_of_rev_en == 1)
 			{
-				tb6600.rev_number_cur++;
-				tb6600.step_number = 0;
+				tb6600.number_of_rev_setup--;
+				
+				if(tb6600.number_of_rev_setup == 0)
+				{
+					tb6600_set_status(&tb6600, TB6600_DISABLE);
+				}
 			}
-    }
+			
+			tb6600.step_number = 0;
+		}
+	}
 }
 
 /* USER CODE END 0 */
@@ -165,7 +179,7 @@ int main(void)
 			tb6600_set_status(&tb6600, TB6600_ENABLE);
 		}
 		
-		// /Pause
+		// Pause
 		if(key == 'D')
 		{
 			tb6600_set_status(&tb6600, TB6600_DISABLE);
@@ -175,7 +189,13 @@ int main(void)
 		if(key == '#')
 		{
 			tb6600.rpm += 10;
-			tb6600_set_speed(&tb6600, tb6600.rpm);
+			tb6600_set_rpm(&tb6600, tb6600.rpm);
+		}
+		
+		// setup the number of revolution
+		if(key == '0')
+		{
+			tb6600_set_num_of_rev(&tb6600, 5, 1);
 		}
   }
   /* USER CODE END 3 */

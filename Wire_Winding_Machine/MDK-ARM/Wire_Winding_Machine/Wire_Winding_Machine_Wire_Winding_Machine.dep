@@ -1,7 +1,7 @@
 Dependencies for Project 'Wire_Winding_Machine', Target 'Wire_Winding_Machine': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32f103xb.s)(0x6378C454)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_Wire_Winding_Machine-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xb.lst --xref -o wire_winding_machine\startup_stm32f103xb.o --depend wire_winding_machine\startup_stm32f103xb.d)
-F (../Core/Src/main.c)(0x6378F573)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../User-I.\RTE\_Wire_Winding_Machine-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o wire_winding_machine\main.o --omf_browse wire_winding_machine\main.crf --depend wire_winding_machine\main.d)
+F (../Core/Src/main.c)(0x63797E34)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../User-I.\RTE\_Wire_Winding_Machine-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o wire_winding_machine\main.o --omf_browse wire_winding_machine\main.crf --depend wire_winding_machine\main.d)
 I (../Core/Inc/main.h)(0x63422B7E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x622ACAB9)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6378C44A)
@@ -34,8 +34,8 @@ I (../Core/Inc/tim.h)(0x6378B8F3)
 I (../Core/Inc/usart.h)(0x63422B7B)
 I (../Core/Inc/gpio.h)(0x63422B79)
 I (../User/keypad.h)(0x63785DB1)
+I (../User/tb6600.h)(0x63797C45)
 I (../User/hw_config.h)(0x6378DCC0)
-I (../User/tb6600.h)(0x6378EDCE)
 F (../Core/Src/gpio.c)(0x6378B7C1)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../User-I.\RTE\_Wire_Winding_Machine-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o wire_winding_machine\gpio.o --omf_browse wire_winding_machine\gpio.crf --depend wire_winding_machine\gpio.d)
 I (../Core/Inc/gpio.h)(0x63422B79)
 I (../Core/Inc/main.h)(0x63422B7E)
@@ -636,8 +636,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x622ACAB9)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x622ACAB9)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x622ACAB9)
 F (..\User\keypad.h)(0x63785DB1)()
-F (..\User\tb6600.c)(0x6378FECB)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../User-I.\RTE\_Wire_Winding_Machine-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o wire_winding_machine\tb6600.o --omf_browse wire_winding_machine\tb6600.crf --depend wire_winding_machine\tb6600.d)
-I (..\User\tb6600.h)(0x6378EDCE)
+F (..\User\tb6600.c)(0x63797CF0)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../User-I.\RTE\_Wire_Winding_Machine-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o wire_winding_machine\tb6600.o --omf_browse wire_winding_machine\tb6600.crf --depend wire_winding_machine\tb6600.d)
+I (..\User\tb6600.h)(0x63797C45)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x622ACAB9)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6378C44A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x622ACAB9)
@@ -668,7 +668,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x622ACAB9)
 I (..\User\hw_config.h)(0x6378DCC0)
 I (../Core/Inc/tim.h)(0x6378B8F3)
 I (../Core/Inc/main.h)(0x63422B7E)
-F (..\User\tb6600.h)(0x6378EDCE)()
+F (..\User\tb6600.h)(0x63797C45)()
 F (C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Source\retarget_io.c)(0x584F0ABE)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../User-I.\RTE\_Wire_Winding_Machine-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Pham Van Phuc\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o wire_winding_machine\retarget_io.o --omf_browse wire_winding_machine\retarget_io.crf --depend wire_winding_machine\retarget_io.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x6026047E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6026047E)
