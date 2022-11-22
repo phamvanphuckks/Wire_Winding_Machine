@@ -142,7 +142,7 @@ int main(void)
 																	KEYPAD_COLUM3_PORT, KEYPAD_COLUM3_PIN,
 																	KEYPAD_COLUM4_PORT, KEYPAD_COLUM4_PIN);
 																		
-	tb6600_init(&tb6600, TB6600_ENABLE, TB6600_RIGHT_2_LEFT, PULSE_PER_REV_200);
+	tb6600_init(&tb6600, TB6600_ENABLE, TB6600_RIGHT_2_LEFT, PULSE_PER_REV_800);
 	
   /*##  Start the TIM Base generation in interrupt mode ####################*/
   HAL_TIM_Base_Start_IT(&htim2);
@@ -188,7 +188,7 @@ int main(void)
 		// rpm
 		if(key == '#')
 		{
-			tb6600.rpm += 10;
+			tb6600.rpm += 1;
 			tb6600_set_rpm(&tb6600, tb6600.rpm);
 		}
 		
@@ -198,7 +198,7 @@ int main(void)
 			tb6600_set_num_of_rev(&tb6600, 5, 1);
 		}
 		
-		HAL_Delay(10);
+		HAL_Delay(1);
   }
   /* USER CODE END 3 */
 }
