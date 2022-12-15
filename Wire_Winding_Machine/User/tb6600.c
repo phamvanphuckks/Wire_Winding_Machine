@@ -1,4 +1,5 @@
 #include "tb6600.h"
+#include "stdio.h"
 
 /*
  * Init the tb6600
@@ -129,4 +130,26 @@ void tb6600_reset(tb6600_t *tb6600)
 	tb6600->rpm                    = 0;
 	tb6600->number_of_rev_setup    = 0;
 	tb6600->number_of_rev_en       = 0;
+}
+
+void tb6600_encode_data(data_frame_t *data_frame, command_type_t cmd, uint32_t data)
+{
+	data_frame->header[0] = 0x55;
+	data_frame->header[1] = 0xAA;
+	data_frame->length    = 0x04;
+	data_frame->command   = cmd;
+	data_frame->data[2]   = data & 0xFF;
+	data_frame->data[1]   = (data >> 8)  & 0xFF;
+	data_frame->data[0]   = (data >> 16) & 0xFF;
+	data_frame->check_sum = (uint8_t) (0xFF - (data_frame->length + (uint8_t) data_frame->command + data_frame->data[0] + data_frame->data[1] + data_frame->data[2]));
+}
+
+void tb6600_send_data(const data_frame_t data_frame)
+{
+	printf("%.02x%.02x%.02x%.02x%.02x%.02x%.02x%.02x", data_frame.header[0], data_frame.header[1], data_frame.length, 
+	                                                                       data_frame.command, 
+	                                                                       data_frame.data[0],
+	                                                                       data_frame.data[1],
+	                                                                       data_frame.data[2],
+	                                                                       data_frame.check_sum);
 }

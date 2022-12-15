@@ -24,6 +24,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
+#include <stdio.h>
+
 #include "keypad.h"
 #include "tb6600.h"
 #include "hw_config.h"
@@ -40,7 +43,28 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+/* USER CODE BEGIN PM */
+#ifdef __GNUC__
+ /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+ set to 'Yes') calls __io_putchar() */
+ #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+ #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+	 
+/**
+ * @brief Retargets the C library printf function to the USART.
+ * @param None
+ * @retval None
+ */
+PUTCHAR_PROTOTYPE 
+{
+ /* Place your implementation of fputc here */
+ /* e.g. write a character to the USART */
+ HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
 
+ return ch;
+}
+#endif /* __GNUC__ */
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -141,7 +165,7 @@ int main(void)
 	                                KEYPAD_COLUM2_PORT, KEYPAD_COLUM2_PIN,
 																	KEYPAD_COLUM3_PORT, KEYPAD_COLUM3_PIN,
 																	KEYPAD_COLUM4_PORT, KEYPAD_COLUM4_PIN);
-																		
+																	
 	tb6600_init(&tb6600, TB6600_ENABLE, TB6600_RIGHT_2_LEFT, PULSE_PER_REV_800);
 	
   /*##  Start the TIM Base generation in interrupt mode ####################*/
